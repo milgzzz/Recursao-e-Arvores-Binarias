@@ -1,7 +1,6 @@
 #include <stdio.h>
 
 int soma(int lista[], int tamanho) {
-    // Caso base: lista vazia
     if (tamanho == 0) {
         return 0;
     }
