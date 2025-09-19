@@ -1,1 +1,26 @@
+#include <stdio.h>
 
+// Versão mais compacta usando ponteiros
+void inverter(char *str) {
+    static int i = 0;
+    int len = strlen(str);
+    
+    if (i < len / 2) {
+        char temp = str[i];
+        str[i] = str[len - i - 1];
+        str[len - i - 1] = temp;
+        i++;
+        inverter(str);
+    }
+    i = 0; // Reseta para próxima chamada
+}
+
+int main() {
+    char texto[] = "estrutura de dados";
+    
+    printf("Original: %s\n", texto);
+    inverter(texto);
+    printf("Invertida: %s\n", texto);
+    
+    return 0;
+}
