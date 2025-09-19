@@ -1,1 +1,79 @@
+#include <stdio.h>
+#include <stdlib.h>
 
+typedef struct No {
+    int valor;
+    struct No *esquerda;
+    struct No *direita;
+} No;
+
+No* criar_no(int valor) {
+    No *novo = (No*)malloc(sizeof(No));
+    novo->valor = valor;
+    novo->esquerda = NULL;
+    novo->direita = NULL;
+    return novo;
+}
+
+No* inserir(No *raiz, int valor) {
+    if (raiz == NULL) return criar_no(valor);
+    
+    if (valor < raiz->valor)
+        raiz->esquerda = inserir(raiz->esquerda, valor);
+    else if (valor > raiz->valor)
+        raiz->direita = inserir(raiz->direita, valor);
+    
+    return raiz;
+}
+
+void pre_ordem(No *raiz) {
+    if (raiz != NULL) {
+        printf("%d ", raiz->valor);  
+        pre_ordem(raiz->esquerda);   
+        pre_ordem(raiz->direita);    
+    }
+}
+
+void in_ordem(No *raiz) {
+    if (raiz != NULL) {
+        in_ordem(raiz->esquerda);    
+        printf("%d ", raiz->valor);   
+        in_ordem(raiz->direita);     
+    }
+}
+
+void pos_ordem(No *raiz) {
+    if (raiz != NULL) {
+        pos_ordem(raiz->esquerda);   
+        pos_ordem(raiz->direita);    
+        printf("%d ", raiz->valor);   
+    }
+}
+
+int main() {
+    No *raiz = NULL;
+    
+    raiz = inserir(raiz, 50);
+    raiz = inserir(raiz, 30);
+    raiz = inserir(raiz, 70);
+    raiz = inserir(raiz, 20);
+    raiz = inserir(raiz, 40);
+    raiz = inserir(raiz, 60);
+    raiz = inserir(raiz, 80);
+    
+    printf("Árvore criada: 50, 30, 70, 20, 40, 60, 80\n\n");
+    
+    printf("Pre-ordem (Root, Left, Right): ");
+    pre_ordem(raiz);
+    printf("\n");
+    
+    printf("In-ordem (Left, Root, Right): ");
+    in_ordem(raiz);
+    printf("\n");
+    
+    printf("Pos-ordem (Left, Right, Root): ");
+    pos_ordem(raiz);
+    printf("\n");
+    
+    return 0;
+}
