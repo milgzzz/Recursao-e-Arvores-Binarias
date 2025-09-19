@@ -1,1 +1,100 @@
+#include <stdio.h>
+#include <stdlib.h>
 
+typedef struct No {
+    int valor;
+    struct No *esquerda;
+    struct No *direita;
+} No;
+
+typedef struct {
+    No *raiz;
+} ArvoreBinaria;
+
+No* criar_no(int valor) {
+    No *novo_no = (No*)malloc(sizeof(No));
+    if (novo_no == NULL) {
+        printf("Erro ao alocar memória!\n");
+        exit(1);
+    }
+    novo_no->valor = valor;
+    novo_no->esquerda = NULL;
+    novo_no->direita = NULL;
+    return novo_no;
+}
+
+void inicializar_arvore(ArvoreBinaria *arvore) {
+    arvore->raiz = NULL;
+}
+
+No* inserir_recursivo(No *raiz, int valor) {
+    if (raiz == NULL) {
+        return criar_no(valor);
+    }
+    
+    if (valor < raiz->valor) {
+        raiz->esquerda = inserir_recursivo(raiz->esquerda, valor);
+    }
+    else if (valor > raiz->valor) {
+        raiz->direita = inserir_recursivo(raiz->direita, valor);
+    }
+    
+    return raiz;
+}
+
+void inserir(ArvoreBinaria *arvore, int valor) {
+    arvore->raiz = inserir_recursivo(arvore->raiz, valor);
+}
+
+void em_ordem(No *raiz) {
+    if (raiz != NULL) {
+        em_ordem(raiz->esquerda);
+        printf("%d ", raiz->valor);
+        em_ordem(raiz->direita);
+    }
+}
+
+void pre_ordem(No *raiz) {
+    if (raiz != NULL) {
+        printf("%d ", raiz->valor);
+        pre_ordem(raiz->esquerda);
+        pre_ordem(raiz->direita);
+    }
+}
+
+void pos_ordem(No *raiz) {
+    if (raiz != NULL) {
+        pos_ordem(raiz->esquerda);
+        pos_ordem(raiz->direita);
+        printf("%d ", raiz->valor);
+    }
+}
+
+int main() {
+    ArvoreBinaria arvore;
+    inicializar_arvore(&arvore);
+    
+    int valores[] = {80, 20, 70, 30, 60, 40, 50};
+    int n = sizeof(valores) / sizeof(valores[0]);
+    
+    printf("Inserindo valores: ");
+    for (int i = 0; i < n; i++) {
+        printf("%d ", valores[i]);
+        inserir(&arvore, valores[i]);
+    }
+    printf("\n\n");
+    
+    printf("Travessia em-ordem: ");
+    em_ordem(arvore.raiz);
+    printf("\n");
+    
+    printf("Travessia pre-ordem: ");
+    pre_ordem(arvore.raiz);
+    printf("\n");
+    
+    printf("Travessia pos-ordem: ");
+    pos_ordem(arvore.raiz);
+    printf("\n");
+    
+    return 0;
+}
