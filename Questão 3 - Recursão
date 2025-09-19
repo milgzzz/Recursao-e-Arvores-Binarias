@@ -1,13 +1,11 @@
 #include <stdio.h>
 
-// Versão mais compacta usando aritmética de ponteiros
 int soma(int lista[], int tamanho) {
     // Caso base: lista vazia
     if (tamanho == 0) {
         return 0;
     }
     
-    // Soma o primeiro elemento com a soma do restante
     return lista[0] + soma(lista + 1, tamanho - 1);
 }
 
