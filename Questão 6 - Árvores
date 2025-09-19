@@ -1,1 +1,19 @@
+int menor_valor(No *raiz) {
+    if (raiz == NULL) {
+        return -1; 
+    }
+    if (raiz->esquerda == NULL) {
+        return raiz->valor; 
+    }
+    return menor_valor(raiz->esquerda); 
+}
 
+int maior_valor(No *raiz) {
+    if (raiz == NULL) {
+        return -1; 
+    }
+    if (raiz->direita == NULL) {
+        return raiz->valor; 
+    }
+    return maior_valor(raiz->direita); 
+}
