@@ -1,1 +1,18 @@
+// a)
+int contar_nos(No *raiz) {
+    if (raiz == NULL) {
+        return 0;
+    }
+    return 1 + contar_nos(raiz->esquerda) + contar_nos(raiz->direita);
+}
 
+// b) 
+int contar_folhas(No *raiz) {
+    if (raiz == NULL) {
+        return 0;
+    }
+    if (raiz->esquerda == NULL && raiz->direita == NULL) {
+        return 1;
+    }
+    return contar_folhas(raiz->esquerda) + contar_folhas(raiz->direita);
+}
