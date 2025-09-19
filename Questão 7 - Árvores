@@ -1,1 +1,16 @@
+int e_bst_util(No *raiz, int min, int max) {
+    if (raiz == NULL) {
+        return 1; 
+    }
+    
+    if (raiz->valor <= min || raiz->valor >= max) {
+        return 0; 
+    }
+    
+    return e_bst_util(raiz->esquerda, min, raiz->valor) &&
+           e_bst_util(raiz->direita, raiz->valor, max);
+}
 
+int e_bst(No *raiz) {
+    return e_bst_util(raiz, -2147483648, 2147483647); 
+}
