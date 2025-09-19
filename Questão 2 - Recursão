@@ -1,1 +1,24 @@
+#include <stdio.h>
 
+// Versão mais compacta
+int maximo(int lista[], int tamanho) {
+    // Caso base: lista com um elemento
+    if (tamanho == 1) {
+        return lista[0];
+    }
+    
+    // Encontra o maior no restante da lista
+    int max_restante = maximo(lista + 1, tamanho - 1);
+    
+    // Retorna o maior entre primeiro elemento e maior do restante
+    return (lista[0] > max_restante) ? lista[0] : max_restante;
+}
+
+int main() {
+    int numeros[] = {4, 16, 20, 8, 12};
+    int tamanho = sizeof(numeros) / sizeof(numeros[0]);
+    
+    printf("Maior elemento: %d\n", maximo(numeros, tamanho));
+    
+    return 0;
+}
