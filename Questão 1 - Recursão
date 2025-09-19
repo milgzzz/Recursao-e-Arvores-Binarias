@@ -1,6 +1,5 @@
 #include <stdio.h>
 
-// Versão mais compacta usando ponteiros
 void inverter(char *str) {
     static int i = 0;
     int len = strlen(str);
@@ -12,7 +11,7 @@ void inverter(char *str) {
         i++;
         inverter(str);
     }
-    i = 0; // Reseta para próxima chamada
+    i = 0; 
 }
 
 int main() {
