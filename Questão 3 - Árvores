@@ -1,1 +1,14 @@
-
+int altura(No *raiz) {
+    if (raiz == NULL) {
+        return -1;
+    }
+    
+    int altura_esquerda = altura(raiz->esquerda);
+    int altura_direita = altura(raiz->direita);
+    
+    if (altura_esquerda > altura_direita) {
+        return altura_esquerda + 1;
+    } else {
+        return altura_direita + 1;
+    }
+}
